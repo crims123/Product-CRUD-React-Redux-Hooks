@@ -17,7 +17,7 @@ function NewProduct() {
                   type="text"
                   className="form-control"
                   placeholder="Product Name"
-                  name="nombre"
+                  name="name"
                 />
               </div>
 
@@ -27,7 +27,7 @@ function NewProduct() {
                   type="number"
                   className="form-control"
                   placeholder="Product Price"
-                  name="precio"
+                  name="price"
                 />
               </div>
 
