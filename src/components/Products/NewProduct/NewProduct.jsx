@@ -1,6 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import useInput from '../../../hooks/useInput';
+import { createProduct } from '../../../actions/products';
 
 function NewProduct() {
+  const dispatch = useDispatch();
+
+  const [values, handleChange] = useInput({
+    name: '',
+    price: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const product = values;
+    dispatch(createProduct(product));
+  };
+  
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -10,7 +26,7 @@ function NewProduct() {
               Add New Product
             </h2>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Product Name</label>
                 <input
@@ -18,6 +34,7 @@ function NewProduct() {
                   className="form-control"
                   placeholder="Product Name"
                   name="name"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -28,6 +45,7 @@ function NewProduct() {
                   className="form-control"
                   placeholder="Product Price"
                   name="price"
+                  onChange={handleChange}
                 />
               </div>
 
