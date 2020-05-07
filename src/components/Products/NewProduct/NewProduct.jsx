@@ -1,10 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import useInput from '../../../hooks/useInput';
 import { createProduct } from '../../../actions/products';
 
 function NewProduct() {
   const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const error = useSelector((state) => state.products.error);
   const loading = useSelector((state) => state.products.loading);
@@ -23,6 +26,7 @@ function NewProduct() {
       name: '',
       price: '',
     });
+    history.push('/');
   };
 
   return (
