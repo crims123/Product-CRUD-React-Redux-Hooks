@@ -7,7 +7,6 @@ function Products() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.data);
-  const loading = useSelector((state) => state.products.loading);
   const error = useSelector((state) => state.products.error);
 
   useEffect(() => {
@@ -23,8 +22,6 @@ function Products() {
           Server Error
         </p>
       ) : null}
-
-      {loading ? <p className="text-center">Loading....</p> : null}
 
       <table className="table table-striped">
         <thead className="bg-primary table-dark">
