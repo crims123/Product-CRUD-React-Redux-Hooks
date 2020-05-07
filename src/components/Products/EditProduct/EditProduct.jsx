@@ -17,6 +17,7 @@ function EditProduct() {
   const product = useSelector((state) => state.products.currentProduct);
   useEffect(() => {
     setValues({ ...product });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   const handleSubmit = (e) => {
