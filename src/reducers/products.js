@@ -16,7 +16,12 @@ function products(state = initialState, action) {
       return { ...state, loading: action.payload };
 
     case ADD_PRODUCT_SUCESS:
-      return { ...state, products: action.payload };
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+        error: null,
+      };
 
     case ADD_PRODUCT_ERROR:
       return { ...state, error: action.payload };

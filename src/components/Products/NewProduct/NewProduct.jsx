@@ -7,8 +7,9 @@ function NewProduct() {
   const dispatch = useDispatch();
 
   const error = useSelector((state) => state.products.error);
+  const loading = useSelector((state) => state.products.loading);
 
-  const [values, handleChange] = useInput({
+  const [values, handleChange, setValues] = useInput({
     name: '',
     price: '',
   });
@@ -17,6 +18,11 @@ function NewProduct() {
     e.preventDefault();
     const product = values;
     dispatch(createProduct(product));
+    e.target.reset();
+    setValues({
+      name: '',
+      price: '',
+    });
   };
 
   return (
@@ -58,6 +64,8 @@ function NewProduct() {
                 Add
               </button>
             </form>
+
+            {loading && <p>Loading...</p>}
 
             {error ? (
               <p className="alert alert-danger p2 mt-4 text-center">
