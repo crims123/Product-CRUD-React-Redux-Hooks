@@ -1,10 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../../hooks/useInput';
 import { createProduct } from '../../../actions/products';
 
 function NewProduct() {
   const dispatch = useDispatch();
+
+  const error = useSelector((state) => state.products.error);
 
   const [values, handleChange] = useInput({
     name: '',
@@ -16,7 +18,7 @@ function NewProduct() {
     const product = values;
     dispatch(createProduct(product));
   };
-  
+
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -57,11 +59,11 @@ function NewProduct() {
               </button>
             </form>
 
-            {/* {error ? (
+            {error ? (
               <p className="alert alert-danger p2 mt-4 text-center">
-                Hubo un error
+                Server Error
               </p>
-            ) : null} */}
+            ) : null}
           </div>
         </div>
       </div>
