@@ -38,8 +38,8 @@ function Products() {
         <tbody>
           {products && products.length === 0
             ? 'There are no products'
-            : products.map((product) => (
-                <Product key={product.id} product={product} />
+            : products.map((product, index) => (
+                <Product key={index} product={product} />
               ))}
         </tbody>
       </table>
