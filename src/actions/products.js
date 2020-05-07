@@ -7,6 +7,9 @@ import {
   ADD_PRODUCT_REQUEST,
   ADD_PRODUCT_SUCESS,
   ADD_PRODUCT_ERROR,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCESS,
+  DELETE_PRODUCT_ERROR,
 } from '../types';
 import axiosClient from '../config/axios';
 
@@ -26,12 +29,26 @@ export const createProduct = (product) => async (dispatch) => {
   try {
     dispatch(request(ADD_PRODUCT_REQUEST, true));
 
-    Swal.fire('Correct', 'The product was successfully added', 'success');
-
     await axiosClient.post('/products', product);
 
     dispatch(success(ADD_PRODUCT_SUCESS, product));
+
+    Swal.fire('Correct', 'The product was successfully added', 'success');
   } catch (err) {
     dispatch(error(ADD_PRODUCT_ERROR, true));
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    dispatch(request(DELETE_PRODUCT_REQUEST, true));
+
+    await axiosClient.delete(`/products/${id}`);
+
+    dispatch(success(DELETE_PRODUCT_SUCESS, id));
+
+    Swal.fire('Deleted', 'Product deleted sucess', 'success');
+  } catch (err) {
+    dispatch(error(DELETE_PRODUCT_ERROR, true));
   }
 };

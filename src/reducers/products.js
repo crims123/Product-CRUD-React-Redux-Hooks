@@ -5,6 +5,9 @@ import {
   ADD_PRODUCT_REQUEST,
   ADD_PRODUCT_SUCESS,
   ADD_PRODUCT_ERROR,
+  DELETE_PRODUCT_REQUEST,
+  DELETE_PRODUCT_SUCESS,
+  DELETE_PRODUCT_ERROR,
 } from '../types';
 
 const initialState = {
@@ -41,6 +44,22 @@ function products(state = initialState, action) {
       };
 
     case ADD_PRODUCT_ERROR:
+      return { ...state, error: action.payload };
+
+    case DELETE_PRODUCT_REQUEST:
+      return { ...state, loading: action.payload };
+
+    case DELETE_PRODUCT_SUCESS:
+      return {
+        ...state,
+        data: [
+          ...state.data.filter((product) => product.id !== action.payload),
+        ],
+        loading: false,
+        error: null,
+      };
+
+    case DELETE_PRODUCT_ERROR:
       return { ...state, error: action.payload };
 
     default:

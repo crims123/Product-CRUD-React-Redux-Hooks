@@ -1,6 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from '../../../actions/products';
 
-function Product({ product: { name, price } }) {
+function Product({ product: { name, price, id } }) {
+  const dispatch = useDispatch();
+
+  const handleDeleteProduct = () => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <tr>
       <td>{name}</td>
@@ -11,8 +19,12 @@ function Product({ product: { name, price } }) {
         <button type="button" className="btn btn-primary mr-2">
           Edit
         </button>
-        <button type="button" className="btn btn-danger">
-          Delete{' '}
+        <button
+          onClick={handleDeleteProduct}
+          type="button"
+          className="btn btn-danger"
+        >
+          Delete
         </button>
       </td>
     </tr>
