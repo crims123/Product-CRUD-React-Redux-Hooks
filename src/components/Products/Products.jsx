@@ -1,17 +1,30 @@
-import React, {Fragment} from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from '../../actions/products';
+import Product from './Product';
 
 function Products() {
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.products.data);
+  const loading = useSelector((state) => state.products.loading);
+  const error = useSelector((state) => state.products.error);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+
   return (
     <Fragment>
       <h2 className="text-center my-5">Products List</h2>
 
-      {/* {error ? (
+      {error ? (
         <p className="font-weight-bold alert alert-danger text-center mt-4">
-          Hubo un error
+          Server Error
         </p>
       ) : null}
 
-      {cargando ? <p className="text-center">Cargando....</p> : null} */}
+      {loading ? <p className="text-center">Loading....</p> : null}
 
       <table className="table table-striped">
         <thead className="bg-primary table-dark">
@@ -21,13 +34,14 @@ function Products() {
             <th scope="col">Actions</th>
           </tr>
         </thead>
-        {/* <tbody>
-          {productos.length === 0
-            ? 'No hay productos'
-            : productos.map((producto) => (
-                <Producto key={producto.id} producto={producto} />
+
+        <tbody>
+          {products && products.length === 0
+            ? 'There are no products'
+            : products.map((product) => (
+                <Product key={product.id} product={product} />
               ))}
-        </tbody> */}
+        </tbody>
       </table>
     </Fragment>
   );
