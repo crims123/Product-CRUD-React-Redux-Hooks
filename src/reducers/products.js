@@ -8,12 +8,17 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCESS,
   DELETE_PRODUCT_ERROR,
+  ADD_CURRENT_PRODUCT,
+  EDIT_PRODUCT_REQUEST,
+  EDIT_PRODUCT_SUCESS,
+  EDIT_PRODUCT_ERROR,
 } from '../types';
 
 const initialState = {
   data: [],
   error: null,
   loading: false,
+  currentProduct: null,
 };
 
 function products(state = initialState, action) {
@@ -60,6 +65,29 @@ function products(state = initialState, action) {
       };
 
     case DELETE_PRODUCT_ERROR:
+      return { ...state, error: action.payload };
+
+    case ADD_CURRENT_PRODUCT:
+      return { ...state, currentProduct: action.payload };
+
+    case EDIT_PRODUCT_REQUEST:
+      return { ...state, loading: action.payload };
+
+    case EDIT_PRODUCT_SUCESS:
+      return {
+        ...state,
+        data: state.data.map((product) => {
+          if (product.id === action.payload.id) {
+            product = action.payload;
+          }
+          return product;
+        }),
+        loading: false,
+        error: null,
+        currentProduct: null,
+      };
+
+    case EDIT_PRODUCT_ERROR:
       return { ...state, error: action.payload };
 
     default:

@@ -10,6 +10,10 @@ import {
   DELETE_PRODUCT_REQUEST,
   DELETE_PRODUCT_SUCESS,
   DELETE_PRODUCT_ERROR,
+  ADD_CURRENT_PRODUCT,
+  EDIT_PRODUCT_REQUEST,
+  EDIT_PRODUCT_SUCESS,
+  EDIT_PRODUCT_ERROR,
 } from '../types';
 import axiosClient from '../config/axios';
 
@@ -50,5 +54,23 @@ export const deleteProduct = (id) => async (dispatch) => {
     Swal.fire('Deleted', 'Product deleted sucess', 'success');
   } catch (err) {
     dispatch(error(DELETE_PRODUCT_ERROR, true));
+  }
+};
+
+export const addCurrentProduct = (product) => (dispatch) => {
+  dispatch({ type: ADD_CURRENT_PRODUCT, payload: product });
+};
+
+export const editProduct = (product) => async (dispatch) => {
+  try {
+    dispatch(request(EDIT_PRODUCT_REQUEST, true));
+
+    await axiosClient.put(`/products/${product.id}`, product);
+
+    dispatch(success(EDIT_PRODUCT_SUCESS, product));
+
+    Swal.fire('Edited', 'Product edited sucess', 'success');
+  } catch (err) {
+    dispatch(error(EDIT_PRODUCT_ERROR, true));
   }
 };

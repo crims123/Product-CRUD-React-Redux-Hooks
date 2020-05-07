@@ -1,9 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteProduct } from '../../../actions/products';
+import { useHistory } from 'react-router-dom';
+import { deleteProduct, addCurrentProduct } from '../../../actions/products';
 
-function Product({ product: { name, price, id } }) {
+function Product({ product, product: { name, price, id } }) {
   const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  const handleEditProduct = () => {
+    dispatch(addCurrentProduct(product));
+    history.push(`/products/edit/${id}`);
+  };
 
   const handleDeleteProduct = () => {
     dispatch(deleteProduct(id));
@@ -16,7 +24,11 @@ function Product({ product: { name, price, id } }) {
         <span className="font-weight-bold"> $ {price} </span>
       </td>
       <td className="acciones">
-        <button type="button" className="btn btn-primary mr-2">
+        <button
+          onClick={handleEditProduct}
+          type="button"
+          className="btn btn-primary mr-2"
+        >
           Edit
         </button>
         <button
