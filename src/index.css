@@ -13,11 +13,13 @@ body {
 h1 a {
   font-size: 1.8rem;
 }
+
 h1 a.text-light:hover {
   color: white !important;
   text-decoration: none !important;
 }
-.nuevo-post {
+
+.new-post {
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -25,6 +27,7 @@ h1 a.text-light:hover {
 .btn {
   font-weight: bold;
 }
+
 .form-group label,
 .list-group-item {
   font-size: 1.4rem;
@@ -33,19 +36,21 @@ h1 a.text-light:hover {
 .navbar .btn {
   flex: 1;
 }
+
+.actions {
+  margin: 1rem 0;
+}
+
+.actions > * {
+  flex: 1;
+}
+
 @media (min-width: 768px) {
   .navbar .btn {
     flex: 0 1 auto;
   }
-}
-.actions {
-  margin: 1rem 0;
-}
-@media (min-width: 768px) {
+
   .actions {
     margin: 0;
   }
-}
-.actions > * {
-  flex: 1;
 }

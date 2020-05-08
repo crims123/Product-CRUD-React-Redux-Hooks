@@ -14,7 +14,7 @@ function Header() {
 
       <Link
         to={'/products/new'}
-        className="btn btn-danger nuevo-post d-block d-md-inline-block"
+        className="btn btn-danger new-post d-block d-md-inline-block"
       >
         Add Product &#43;
       </Link>
